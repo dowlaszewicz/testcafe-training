@@ -1,0 +1,25 @@
+{
+  "name": "testcafe-training",
+  "version": "1.0.0",
+  "description": "Automated testing with TestCafe",
+  "main": "index.js",
+  "scripts": {
+    "test:chrome": "testcafe chrome ./tests -s takeOnFails = true",
+    "test:chrome:headless": "testcafe chrome:headless ./tests",
+    "test:chrome:mobile": "testcafe chrome:headless:emulation:device=iphone X ./tests",
+    "test:safari": "testcafe safari ./tests",
+    "test:firefox": "testcafe firefox ./tests"
+  },
+  "keywords": [
+    "Testcafe",
+    "Testing",
+    "Automation"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node": "^10.22.1",
+    "prettier": "^2.1.2",
+    "testcafe": "^1.9.3"
+  }
+}
