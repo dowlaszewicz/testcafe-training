@@ -44,12 +44,11 @@ test("User can login to application", async t => {
 
     const userIcon = Selector('.icon-user')
     await t.click(userIcon)
+    
 
-    const loggoutButton = Selector('.logout_link')
+    const loggoutButton = Selector('#logout_link')
     await t.click(loggoutButton)
     await t.expect(signInButton.exists).ok()
     await t.expect(loggoutButton.exists).notOk()
-
-
 }
 )
