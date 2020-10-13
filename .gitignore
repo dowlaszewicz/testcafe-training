@@ -1,6 +1,6 @@
 node_modules
 screenshots
 build
-npm-debug.log
+npm-debug.log   
 .env
 .DS_Store
