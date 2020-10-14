@@ -1,17 +1,19 @@
 import {Selector} from 'testcafe'
+import {login} from '../Tests/helper'
 
 fixture `Add new payee`
   .page `http://zero.webappsecurity.com/index.html`
 
 test.before(async t => {
-      const signInButton = Selector('#signin_button')
-      const userNameInput = Selector('#user_login')
-      const passwordInput = Selector('#user_password')
-      const submitButton = Selector('.btn-primary')
-      await t.click(signInButton)
-      await t.typeText(userNameInput, "username", {paste: true})
-      await t.typeText (passwordInput, "password", {paste: true})
-      await t.click(submitButton)
+    //   const signInButton = Selector('#signin_button')
+    //   const userNameInput = Selector('#user_login')
+    //   const passwordInput = Selector('#user_password')
+    //   const submitButton = Selector('.btn-primary')
+    //   await t.click(signInButton)
+    //   await t.typeText(userNameInput, "username", {paste: true})
+    //   await t.typeText (passwordInput, "password", {paste: true})
+    //   await t.click(submitButton)
+    await login('username', 'password')
   })('User can add new payee to the list', async t => {
     //Selectors
 
