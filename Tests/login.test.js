@@ -1,54 +1,25 @@
 import { Selector } from 'testcafe'
+// import {login} from './helper'
+import loginPage from '../page-object/pages/loginPage'
+import Navbar from '../page-object/components/Navbar'
 
 fixture `Login Test`
 .page`http://zero.webappsecurity.com/index.html`
 
+const navbar = new Navbar()
+const loginpage = new loginPage()
+
 test("User cannot login with invalid credentails", async t => {
-    const signInButton = Selector('#signin_button')
-    await t.click(signInButton)
+await t.click(navbar.signInButton)
+loginpage.loginToApp('invalidusername','invalidpassword')
 
-    const loginForm = Selector('#login_form')
-    await t.expect(loginForm.exists).ok()
-
-    const userNameInput = Selector('#user_login')
-    const passwordInput = Selector('#user_password')
-    await t.typeText(userNameInput, "invalid username", {paste: true})
-    await t.typeText (passwordInput, "invalid password", {paste: true})
-
-    const submitButton = Selector('.btn-primary')
-    await t.click(submitButton)
-
-    const errorMessage = Selector('.alert-error').innerText
-    await t.expect(errorMessage).contains("Login and/or password are wrong.")
+await t.expect(loginpage.errorMessage.innerText).contains("Login and/or password are wrong.")
 }
 )
 
-test("User can login to application", async t => {
-    const signInButton = Selector('#signin_button')
-    await t.click(signInButton)
+test("User can login to application", async t => { 
+    await t.click(navbar.signInButton)
+    loginpage.loginToApp('username','password')
 
-    const loginForm = Selector('#login_form')
-    await t.expect(loginForm.exists).ok()
-
-    const userNameInput = Selector('#user_login')
-    const passwordInput = Selector('#user_password')
-    await t.typeText(userNameInput, "username", {paste: true})
-    await t.typeText (passwordInput, "password", {paste: true})
-
-    const submitButton = Selector('.btn-primary')
-    await t.click(submitButton)
-
-    const accountSummaryTab = Selector('#account_summary_tab')
-    await t.expect(accountSummaryTab.exists).ok()
-    await t.expect(loginForm.exist).notOk()
-
-    const userIcon = Selector('.icon-user')
-    await t.click(userIcon)
-    
-
-    const loggoutButton = Selector('#logout_link')
-    await t.click(loggoutButton)
-    await t.expect(signInButton.exists).ok()
-    await t.expect(loggoutButton.exists).notOk()
 }
 )

@@ -1,21 +1,19 @@
-import {Selector, Selectors} from 'testcafe'
+import Navbar from '../page-object/components/Navbar'
+import searchResultPage from '../page-object/pages/searchResultPage'
+
+const navbar = new Navbar()
+const searchresultPage = new searchResultPage()
+
     fixture `Search box` 
     .page`http://zero.webappsecurity.com/index.html`
 
 test("Search on the website", async t =>{
-    //Selectors
-    const searchBox = Selector('.search-query')
-    const results = Selector('h2')
-    const linkText = Selector('div').innerText
 
-    //Actions
-    await t.typeText(searchBox, "online bank", {paste: true})
-    await t.pressKey('enter')
+    navbar.search('online_bank')
 
-    //Assertions
-    await t.expect(results.exists).ok()
-    await t.expect(searchBox.exists).ok()
-    await t.expect(linkText).contains('Zero - Free Access to Online Banking')
+    await t.expect(searchresultPage.resultTitle.exists).ok()
+    await t.expect(navbar.searchBox.exists).ok()
+    await t.expect(searchresultPage.linkText.innerText).contains('Zero - Free Access to Online Banking')
 
 }
 )
